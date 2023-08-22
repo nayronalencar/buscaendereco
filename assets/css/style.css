@@ -32,7 +32,8 @@ header .head {
     margin: 15px;
 }
 
-.searchArea .searchTitle {
+.searchArea .searchTitle,
+.warning {
     color: #fff;
 }
 

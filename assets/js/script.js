@@ -3,20 +3,51 @@ document.querySelector('form').addEventListener("submit", async (event) => {
     let input = document.querySelector('#search').value;
 
     if (input !== '') {
+        cleanInfo();
+        showWarning('Carregando...');
         let url = `https://viacep.com.br/ws/${input}/json/`;
-
         let results = await fetch(url);
         let json = await results.json();
+        let status = results.status;
+        console.log(status);
+        
 
-        console.log(json);
+        if (status !== 200) {
+            showWarning('Dado inválido...');
+        } else {
+            showWarning('');
+            showInfo({
+                uf: json.uf,
+                logradouro: json.logradouro,
+                bairro: json.bairro,
+                localidade: json.localidade,
+                cep: json.cep
+            });
+        }
 
 
     } else {
-        console.log('dado invalido');
+        showWarning('Dado inválido...');
     }
 
 
 
-
-
 });
+
+function showWarning(msg) {
+    document.querySelector('.warning').innerHTML = msg;
+}
+
+function showInfo(obj) {
+    document.querySelector('.uf').innerHTML = obj.uf;
+    document.querySelector('.logradouro').innerHTML = obj.logradouro;
+    document.querySelector('.bairro').innerHTML = obj.bairro;
+    document.querySelector('.localidade').innerHTML = obj.localidade;
+    document.querySelector('.cep').innerHTML = obj.cep;
+    document.querySelector('.result').style.display = 'block';
+}
+
+function cleanInfo() {
+    showWarning('');
+    document.querySelector('.result').style.display = 'none';
+}
