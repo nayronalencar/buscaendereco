@@ -20,4 +20,36 @@ header .head {
     color: #fff;
     align-items: center;
     font-size: 23px;
+    padding: 10px;
 }
+
+.head .description {
+    margin-left: 5px;
+}
+
+.searchArea {
+    margin: 15px;
+}
+
+.searchArea .searchTitle {
+    color: #fff;
+}
+
+.search form input[type="search"],
+.search form input[type="submit"] {
+    padding: 8px;
+    font-size: 15px;
+    outline: none;
+    border: 0;
+}
+
+.search form input[type="submit"] {
+    background-color: #D4A02B;
+    color: #000;    
+}
+
+.search form input[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #FFC034;
+}
+
