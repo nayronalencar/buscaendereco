@@ -1,0 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0033cc;
+    font-family: 'Oswald', sans-serif;
+}
+
+header {
+    background-color: #000;
+    height: auto;
+    width: 100%;
+}
+
+header .head {
+    display: flex;
+    color: #fff;
+    align-items: center;
+    font-size: 23px;
+}
