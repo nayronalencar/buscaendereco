@@ -7,6 +7,7 @@ body {
     padding: 0;
     background-color: #0033cc;
     font-family: 'Oswald', sans-serif;
+    
 }
 
 header {
@@ -51,5 +52,15 @@ header .head {
 .search form input[type="submit"]:hover {
     cursor: pointer;
     background-color: #FFC034;
+}
+
+.result {
+    display: none;
+}
+
+fieldset {
+    color: #FFF;
+    border: 5px solid;
+    
 }
 
