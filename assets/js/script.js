@@ -9,10 +9,10 @@ document.querySelector('form').addEventListener("submit", async (event) => {
         let results = await fetch(url);
         let json = await results.json();
         let status = results.status;
-        console.log(status);
+        console.log(json);
         
 
-        if (status !== 200) {
+        if (json.cep === '') {
             showWarning('Dado inválido...');
         } else {
             showWarning('');
@@ -39,6 +39,7 @@ function showWarning(msg) {
 }
 
 function showInfo(obj) {
+    
     document.querySelector('.uf').innerHTML = obj.uf;
     document.querySelector('.logradouro').innerHTML = obj.logradouro;
     document.querySelector('.bairro').innerHTML = obj.bairro;
