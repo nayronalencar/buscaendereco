@@ -1,8 +1,11 @@
 document.querySelector('form').addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector('#search').value;
+    let regex = /^\d+$/;
+    //console.log(regex.test(input));
+    
 
-    if (input !== '') {
+    if (input !== '' && regex.test(input) === true) {
         cleanInfo();
         showWarning('Carregando...');
         let url = `https://viacep.com.br/ws/${input}/json/`;
@@ -27,7 +30,8 @@ document.querySelector('form').addEventListener("submit", async (event) => {
 
 
     } else {
-        showWarning('Dado inválido...');
+        cleanInfo();
+        showWarning('Digite um CEP válido sem hífen, apenas números.');
     }
 
 
