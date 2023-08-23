@@ -1,14 +1,16 @@
 document.querySelector('form').addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector('#search').value;
+    let trimInput = input.trim();
+    //console.log(input.trim());
     let regex = /^\d+$/;
     //console.log(input.length);
 
 
-    if (input !== '' && regex.test(input) === true && input.length === 8) {
+    if (trimInput !== '' && regex.test(trimInput) === true && trimInput.length === 8) {
         cleanInfo();
         showWarning('Carregando...');
-        let url = `https://viacep.com.br/ws/${input}/json/`;
+        let url = `https://viacep.com.br/ws/${trimInput}/json/`;
         let results = await fetch(url);
         let json = await results.json();
         let status = results.status;
