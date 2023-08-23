@@ -28,7 +28,8 @@ document.querySelector('form').addEventListener("submit", async (event) => {
                     logradouro: json.logradouro,
                     bairro: json.bairro,
                     localidade: json.localidade,
-                    cep: json.cep
+                    cep: json.cep,
+                    ddd: json.ddd
                 });
             }
 
@@ -48,13 +49,12 @@ function showWarning(msg) {
     document.querySelector('.warning').innerHTML = msg;
 }
 
-function showInfo(obj) {
-
-    document.querySelector('.uf').innerHTML = obj.uf;
+function showInfo(obj) {    
     document.querySelector('.logradouro').innerHTML = obj.logradouro;
-    document.querySelector('.bairro').innerHTML = obj.bairro;
-    document.querySelector('.localidade').innerHTML = obj.localidade;
+    document.querySelector('.bairro').innerHTML = `Bairro: ${obj.bairro}`;
+    document.querySelector('.localidade').innerHTML = `Cidade: ${obj.localidade}/${obj.uf}`;
     document.querySelector('.cep').innerHTML = obj.cep;
+    document.querySelector('.ddd').innerHTML = `DDD: ${obj.ddd}`;
     document.querySelector('.result').style.display = 'block';
 }
 
