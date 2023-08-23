@@ -2,10 +2,10 @@ document.querySelector('form').addEventListener("submit", async (event) => {
     event.preventDefault();
     let input = document.querySelector('#search').value;
     let regex = /^\d+$/;
-    //console.log(regex.test(input));
-    
+    //console.log(input.length);
 
-    if (input !== '' && regex.test(input) === true) {
+
+    if (input !== '' && regex.test(input) === true && input.length === 8) {
         cleanInfo();
         showWarning('Carregando...');
         let url = `https://viacep.com.br/ws/${input}/json/`;
@@ -13,25 +13,31 @@ document.querySelector('form').addEventListener("submit", async (event) => {
         let json = await results.json();
         let status = results.status;
         console.log(json);
-        
+        console.log(status);
 
-        if (json.cep === '') {
+
+        if (status !== 200) {
             showWarning('Dado inválido...');
         } else {
-            showWarning('');
-            showInfo({
-                uf: json.uf,
-                logradouro: json.logradouro,
-                bairro: json.bairro,
-                localidade: json.localidade,
-                cep: json.cep
-            });
+            if (json.erro === 'true' || json.erro === true) {
+                showWarning('Dados não encontrados...');
+            } else {
+                showWarning('');
+                showInfo({
+                    uf: json.uf,
+                    logradouro: json.logradouro,
+                    bairro: json.bairro,
+                    localidade: json.localidade,
+                    cep: json.cep
+                });
+            }
+
         }
 
 
     } else {
         cleanInfo();
-        showWarning('Digite um CEP válido sem hífen, apenas números.');
+        showWarning('Digite um CEP válido sem hífen, apenas números, 8 dígitos no total.');
     }
 
 
@@ -43,7 +49,7 @@ function showWarning(msg) {
 }
 
 function showInfo(obj) {
-    
+
     document.querySelector('.uf').innerHTML = obj.uf;
     document.querySelector('.logradouro').innerHTML = obj.logradouro;
     document.querySelector('.bairro').innerHTML = obj.bairro;
