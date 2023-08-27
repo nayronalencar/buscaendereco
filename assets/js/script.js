@@ -9,7 +9,8 @@ document.querySelector('form').addEventListener("submit", async (event) => {
 
     if (trimInput !== '' && regex.test(trimInput) === true && trimInput.length === 8) {
         cleanInfo();
-        showWarning('Carregando...');
+        //showWarning('Carregando...');
+        loading('block');
         let url = `https://viacep.com.br/ws/${trimInput}/json/`;
         let results = await fetch(url);
         let json = await results.json();
@@ -22,9 +23,11 @@ document.querySelector('form').addEventListener("submit", async (event) => {
             showWarning('Dado inválido...');
         } else {
             if (json.erro === 'true' || json.erro === true) {
+                loading('none');
                 showWarning('Dados não encontrados...');
             } else {
-                showWarning('');
+                //showWarning('');
+                loading('none');
                 showInfo({
                     uf: json.uf,
                     logradouro: json.logradouro,
@@ -63,4 +66,9 @@ function showInfo(obj) {
 function cleanInfo() {
     showWarning('');
     document.querySelector('.result').style.display = 'none';
+}
+
+function loading(display) {
+    let loading = document.querySelector('.loading');
+    loading.style.display = display;
 }
